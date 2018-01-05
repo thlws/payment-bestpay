@@ -1,5 +1,5 @@
 ## 项目介绍
-- 用户对接 中国电信.天翼支付 ，官方 https://www.bestpay.com.cn/
+- 用于对接 中国电信.天翼支付 ，官方 https://www.bestpay.com.cn/
 
 
 
@@ -45,7 +45,7 @@ _暂时还不能(如上添加方式暂不可用)._
 _是的，仅支持 JDK >= 1.7 ._
 
 - 有没有天翼支付相关文档？<br>
-_[天翼支付]()_ <br>
+_[天翼支付](https://gitee.com/thlws/payment-bestpay/blob/master/docs/%E7%94%B5%E4%BF%A1%E7%BF%BC%E6%94%AF%E4%BB%98.pdf)_ <br>
 
 
 ## 打赏一下
