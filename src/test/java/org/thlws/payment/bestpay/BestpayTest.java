@@ -77,7 +77,7 @@ public class BestpayTest {
 		input.setOrderDate("20171224121212");
 
 		OrderResultOutput output = BestpayCore.query(input, key);
-		assertNotNull(output.getResult());
+		assertNotNull(output);
 	}
 
 	/**
@@ -117,12 +117,6 @@ public class BestpayTest {
 		OrderRefundOutput output = BestpayCore.refund(input, key);
 		assertNotNull(output.getResult());
 	}
-
-
-
-
-
-
 
 
 }
