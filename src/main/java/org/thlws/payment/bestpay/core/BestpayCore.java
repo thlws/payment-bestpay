@@ -17,10 +17,31 @@ import org.thlws.payment.bestpay.sign.MD5;
 
 import java.util.Map;
 
+/**
+ * 电信天翼支付 核心Class，提供支付相关接口
+ * <h4>核心参数</h4>
+ * <ul>
+ *     <li>merchantId -商户号</li>
+ *     <li>key -商户数据 KEY</li>
+ *     <li>merchantPwd 商户密码(又称 交易key),退款&撤销时必须-</li>
+ * </ul>
+ * @see <a href="https://www.bestpay.com.cn/play/home">https://www.bestpay.com.cn/play/home</a>
+ * Created by HanleyTang on 2018/1/5
+ *
+ * @author Hanley[hanley@thlws.com]
+ * @version 1.0
+ */
 public class BestpayCore implements BestpayApi{
 
 	private static final Log log = LogFactory.get();
 
+	/**
+	 * 天翼支付-付款码支付.
+	 *
+	 * @param input 支付参数对象 {@link BarcodePayInput}
+	 * @param key   商户数据Key,签名需要
+	 * @return 支付结果对象 {@link OrderResultOutput}
+	 */
 	public static OrderResultOutput barcode(BarcodePayInput input, String key) {
 
 		OrderResultOutput out = null;
@@ -47,8 +68,15 @@ public class BestpayCore implements BestpayApi{
 		}
 		return out;
 	}
-	
-	
+
+
+	/**
+	 * 查询支付订单
+	 *
+	 * @param input 查询参数对象 {@link QueryOrderInput}
+	 * @param key   商户数据Key,签名需要
+	 * @return 支付结果对象 {@link OrderResultOutput}
+	 */
 	public static OrderResultOutput query(QueryOrderInput input, String key) {
 		
 		OrderResultOutput out = null;
@@ -73,8 +101,15 @@ public class BestpayCore implements BestpayApi{
 		}
 		return out;
 	}
-	
-	
+
+
+	/**
+	 * 商户退款,须商户密码 OrderRefundInput.merchantPwd
+	 *
+	 * @param input 退款参数对象 {@link OrderRefundInput}
+	 * @param key   商户数据Key,签名需要
+	 * @return 退款结果对象 {@link OrderRefundOutput}
+	 */
 	public static OrderRefundOutput refund(OrderRefundInput input, String key) {
 		
 		OrderRefundOutput out = null;
@@ -105,13 +140,20 @@ public class BestpayCore implements BestpayApi{
 		
 	}
 
+	/**
+	 * 撤销支付,须商户密码 OrderReverseInput.merchantPwd
+	 *
+	 * @param input 撤销参数对象 {@link OrderReverseInput}
+	 * @param key   商户数据Key,签名需要
+	 * @return 撤销结果对象 {@link OrderReverseOutput}
+	 */
 	public static OrderReverseOutput reverse(OrderReverseInput input, String key) {
 		
 		
 		OrderReverseOutput out = null;
 
 		try {
-			StringBuilder sb = new StringBuilder();//组装 mac 加密明文串
+			StringBuilder sb = new StringBuilder();
 			sb.append("MERCHANTID=").append(input.getMerchantId());
 			sb.append("&MERCHANTPWD=").append(input.getMerchantPwd());
 			sb.append("&OLDORDERNO=").append(input.getOldOrderNo());
@@ -120,7 +162,6 @@ public class BestpayCore implements BestpayApi{
 			sb.append("&REFUNDREQDATE=").append(input.getRefundReqDate());
 			sb.append("&TRANSAMT=").append(input.getTransAmt());
 			sb.append("&KEY=").append(key);
-
 
 			String mac = MD5.sign(sb.toString());
 			Map<String, Object> map = BeanUtil.beanToMap(input,false,true);
