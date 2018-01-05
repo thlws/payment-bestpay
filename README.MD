@@ -1,10 +1,10 @@
 ## 项目介绍
 - 用于对接 中国电信.天翼支付 ，官方 https://www.bestpay.com.cn/
-
+- 依赖库实现基础支付相关接口,若需异步通知或退款回调请参考文档自行实现相关功能.
 
 
 ## 更新日志
-- v0.0.1 天翼支付依赖库发布;
+- v1.0.0 天翼支付依赖库发布;
 
 
 
@@ -23,12 +23,12 @@
 <dependency>
     <groupId>org.thlws</groupId>
     <artifactId>payment-bestpay</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 - Gradle
 ```
-compile 'org.thlws:payment-bestpay:0.0.1'
+compile 'org.thlws:payment-bestpay:1.0.0'
 ```
 
 ## 源码测试
