@@ -20,13 +20,14 @@ import java.util.Map;
 
 /**
  * 电信天翼支付 核心Class，提供支付相关接口
- * <h4>核心参数</h4>
+ * 核心参数<br>
  * <ul>
  *     <li>merchantId -商户号</li>
  *     <li>key -商户数据 KEY</li>
- *     <li>merchantPwd 商户密码(又称 交易key),退款&撤销时必须-</li>
+ *     <li>merchantPwd 商户密码(又称 交易key),退款和撤销时必须</li>
  * </ul>
- * @see <a href="https://www.bestpay.com.cn/play/home">https://www.bestpay.com.cn/play/home</a>
+ *
+ * @see <a href="https://www.bestpay.com.cn/play/start">https://www.bestpay.com.cn/play/start</a>
  * Created by HanleyTang on 2018/1/5
  *
  * @author Hanley[hanley@thlws.com]

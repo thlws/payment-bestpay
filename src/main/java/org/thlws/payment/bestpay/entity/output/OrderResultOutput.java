@@ -1,7 +1,7 @@
 package org.thlws.payment.bestpay.entity.output;
 
 /**
- * 支付&查询 结果对象
+ * 支付和查询 结果对象
  * Created by HanleyTang on 2018/1/5
  *
  * @author Hanley[hanley@thlws.com]
@@ -597,7 +597,7 @@ public class OrderResultOutput {
 	}
 
 	/***
-	 * transStatus--> A：请求（支付中）	B：成功（支付成功）		C：失败（订单状态结果）
+	 * transStatus
 	 * @return boolean
 	 */
 	public boolean isPaySuccess() {
