@@ -14,6 +14,7 @@ import org.thlws.payment.bestpay.entity.output.OrderRefundOutput;
 import org.thlws.payment.bestpay.entity.output.OrderResultOutput;
 import org.thlws.payment.bestpay.entity.output.OrderReverseOutput;
 import org.thlws.payment.bestpay.sign.MD5;
+import org.thlws.payment.bestpay.utils.ThlwsJsonUtil;
 
 import java.util.Map;
 
@@ -59,12 +60,12 @@ public class BestpayCore implements BestpayApi{
 
 			Map<String, Object> map = BeanUtil.beanToMap(input,false,true);
 			map.put("mac", mac);
-
+			log.info("天翼扫码支付请求数据[barcode]->request:\n {}", ThlwsJsonUtil.format(map));
 			String result = HttpUtil.get(barcode, map);
+			log.info("天翼扫码支付返回数据[barcode]->response \n : {}",ThlwsJsonUtil.format(result));
 			out = JSONUtil.toBean(result,OrderResultOutput.class);
-			log.info("天翼扫码支付返回参数[response]\n : {}",JSONUtil.formatJsonStr(result));
 		} catch (Exception e) {
-			log.error("天翼扫码支付异常,error={}",e.getMessage());
+			log.error("天翼扫码支付异常[barcode],error={}",e.getMessage());
 		}
 		return out;
 	}
@@ -92,12 +93,13 @@ public class BestpayCore implements BestpayApi{
 			String mac = MD5.sign(sb.toString());
 			Map<String, Object> map = BeanUtil.beanToMap(input,false,true);
 			map.put("mac", mac);
-
+			log.info("翼支付查询请求数据[query]->request:\n {}", ThlwsJsonUtil.format(map));
 			String result = HttpUtil.get(query, map);
+			log.info("翼支付查询返回数据[query]->response \n : {}",ThlwsJsonUtil.format(result));
 			out = JSONUtil.toBean(result,OrderResultOutput.class);
 
 		} catch (Exception e) {
-			log.error("查询支付订单异常,error={}",e.getMessage());
+			log.error("查询支付订单异常[query],error={}",e.getMessage());
 		}
 		return out;
 	}
@@ -129,12 +131,13 @@ public class BestpayCore implements BestpayApi{
 			String mac = MD5.sign(sb.toString());
 			Map<String, Object> map = BeanUtil.beanToMap(input,false,true);
 			map.put("mac", mac);
-
-			String result = HttpUtil.get(refund, map);
+			log.info("翼支付退款请求数据[refund]->request:\n {}", ThlwsJsonUtil.format(map));
+			String result = HttpUtil.post(refund, map);
+			log.info("翼支付退款返回数据[refund]->response \n : {}",ThlwsJsonUtil.format(result));
 			out = JSONUtil.toBean(result,OrderRefundOutput.class);
 
 		} catch (Exception e) {
-			log.error("退款异常,error={}",e.getMessage());
+			log.error("退款异常[refund],error={}",e.getMessage());
 		}
 		return out;
 		
@@ -166,12 +169,13 @@ public class BestpayCore implements BestpayApi{
 			String mac = MD5.sign(sb.toString());
 			Map<String, Object> map = BeanUtil.beanToMap(input,false,true);
 			map.put("mac", mac);
-
-			String result = HttpUtil.get(reverse, map);
+			log.info("翼支付撤销请求数据[reverse]->request:\n {}", ThlwsJsonUtil.format(map));
+			String result = HttpUtil.post(reverse, map);
+			log.info("翼支付撤销返回数据[reverse]->response \n : {}",ThlwsJsonUtil.format(result));
 			out = JSONUtil.toBean(result,OrderReverseOutput.class);
 
 		} catch (Exception e) {
-			log.error("撤销订单异常,error={}",e.getMessage());
+			log.error("撤销订单异常[reverse],error={}",e.getMessage());
 		}
 		return out;
 		
