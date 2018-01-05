@@ -14,15 +14,24 @@ import org.thlws.payment.bestpay.entity.output.OrderReverseOutput;
 /**
  * Created by HanleyTang on 2018/1/5
  * 电信天翼支付测试
- * @author Hanley[hanley@thlws.com]
+ *
+ * @author Hanley[hanley @thlws.com]
  * @version 1.0
  */
 public class BestpayTest {
 
+	/**商户数据 KEY*/
 	private final  String key = "E20356A94DA4E83810993FD14C10657F3120F1EDA1C43BF7";
-	private final  String merchantPwd = "946476";// 商户退款密码
+
+	/**商户退款密码(又称 交易key)*/
+	private final  String merchantPwd = "946476";
+
+	/**商户号*/
 	private final  String merchantId = "02450107030126669";
 
+	/**
+	 * 撤销支付-测试.
+	 */
 	@Test
 	public  void testReverse() {
 
@@ -39,6 +48,9 @@ public class BestpayTest {
 	}
 
 
+	/**
+	 * 退款-测试.
+	 */
 	@Test
 	public  void testRefund() {
 		OrderRefundInput input = new OrderRefundInput();
@@ -55,6 +67,9 @@ public class BestpayTest {
 	}
 
 
+	/**
+	 * 查询交易-测试.
+	 */
 	@Test
 	public  void testQuery() {
 		QueryOrderInput input = new QueryOrderInput();
@@ -68,6 +83,9 @@ public class BestpayTest {
 	}
 
 
+	/**
+	 * 支付-测试.
+	 */
 	@Test
 	public  void testPay() {
 
