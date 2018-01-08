@@ -36,6 +36,9 @@ compile 'org.thlws:payment-bestpay:1.0.0'
 2. 导入到 Eclipse 或 Intellij IDEA
 3. 运行 Junit Class BestpayTest (天翼支付相关接口)
 
+## 项目依赖
+- [http://www.hutool.cn](http://www.hutool.cn)
+
 ## 更新日志
 - v1.0.0 天翼支付依赖库发布;
 
