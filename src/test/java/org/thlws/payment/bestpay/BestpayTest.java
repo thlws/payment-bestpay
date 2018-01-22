@@ -1,8 +1,8 @@
 package org.thlws.payment.bestpay;
 
-import com.xiaoleilu.hutool.json.JSONUtil;
-import com.xiaoleilu.hutool.lang.Console;
-import com.xiaoleilu.hutool.util.RandomUtil;
+import cn.hutool.json.JSONUtil;
+import cn.hutool.core.lang.Console;
+import cn.hutool.core.util.RandomUtil;
 import org.junit.Test;
 import org.thlws.payment.bestpay.core.BestpayCore;
 import org.thlws.payment.bestpay.entity.input.BarcodePayInput;

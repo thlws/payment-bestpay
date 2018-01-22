@@ -1,6 +1,6 @@
 package org.thlws.payment.bestpay.utils;
 
-import com.xiaoleilu.hutool.json.JSONUtil;
+import cn.hutool.json.JSONUtil;
 
 /**
  * JSON格式化工具

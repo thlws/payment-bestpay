@@ -4,7 +4,7 @@
 
     <groupId>org.thlws</groupId>
     <artifactId>payment-bestpay</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>payment-bestpay</name>
@@ -13,7 +13,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.hutool>3.3.0</version.hutool>
+        <version.hutool>4.0.1</version.hutool>
     </properties>
 
     <dependencies>
@@ -25,7 +25,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.xiaoleilu</groupId>
+            <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${version.hutool}</version>
         </dependency>

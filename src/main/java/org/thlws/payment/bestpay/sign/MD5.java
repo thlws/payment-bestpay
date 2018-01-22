@@ -1,7 +1,7 @@
 package org.thlws.payment.bestpay.sign;
 
-import com.xiaoleilu.hutool.log.Log;
-import com.xiaoleilu.hutool.log.LogFactory;
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 
 import java.security.MessageDigest;
 

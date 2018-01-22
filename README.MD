@@ -29,12 +29,12 @@
 <dependency>
     <groupId>org.thlws</groupId>
     <artifactId>payment-bestpay</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 - Gradle
 ```
-compile 'org.thlws:payment-bestpay:1.0.0'
+compile 'org.thlws:payment-bestpay:1.0.1'
 ```
 
 ### 源码测试
@@ -47,6 +47,7 @@ compile 'org.thlws:payment-bestpay:1.0.0'
 
 ### 更新日志
 - v1.0.0 天翼支付依赖库发布;
+- v1.0.1 升级依赖库hutool;
 
 ### FAQ
 - 能不能直接 dependency 添加依赖?<br>
@@ -62,4 +63,4 @@ _[天翼支付](https://gitee.com/thlws/payment-bestpay/raw/master/docs/%E7%94%B
 _中国电信.翼支付,官方网站[https://www.bestpay.com.cn](https://www.bestpay.com.cn)_
 
 ## 打赏一下
-![](imgs/award.png)
+![](imgs/award.jpg)
