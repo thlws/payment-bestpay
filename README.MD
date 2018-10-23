@@ -16,8 +16,9 @@
 - v1.0.1 升级依赖库hutool;
 
 ### 参考文档
-- [天翼支付API文档](https://gitee.com/thlws/payment-bestpay/raw/master/docs/%E7%94%B5%E4%BF%A1%E7%BF%BC%E6%94%AF%E4%BB%98.pdf)
-- [https://www.bestpay.com.cn](https://www.bestpay.com.cn)
+- [API 文档](https://apidoc.gitee.com/thlws/payment-bestpay)
+- [天翼支付官方文档](https://gitee.com/thlws/payment-bestpay/raw/master/docs/%E7%94%B5%E4%BF%A1%E7%BF%BC%E6%94%AF%E4%BB%98.pdf)
+- [天翼支付网站](https://www.bestpay.com.cn)
 
 
 ### 在线交流
