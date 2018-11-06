@@ -1,7 +1,7 @@
 翼支付
 ============
 [![](https://img.shields.io/badge/release-v1.0.1-green.svg)](https://github.com/thlws/payment-bestpay)   [![](https://img.shields.io/badge/license-Apache--2-yellowgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)  [![](https://img.shields.io/badge/maven%20central-v1.0.1-orange.svg)](https://search.maven.org/artifact/org.thlws/payment-bestpay/1.0.1/jar) 
-
+[![](https://img.shields.io/badge/jdk-1.7%2B-red.svg)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 > 基于Java实现的 中国电信.翼支付  依赖库
 
 ### 功能说明

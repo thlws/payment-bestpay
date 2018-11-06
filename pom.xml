@@ -13,7 +13,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.hutool>4.0.1</version.hutool>
+        <version.hutool>4.1.19</version.hutool>
     </properties>
 
     <dependencies>
