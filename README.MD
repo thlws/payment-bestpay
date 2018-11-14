@@ -4,6 +4,8 @@
 [![](https://img.shields.io/badge/jdk-1.7%2B-red.svg)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 > 基于Java实现的 中国电信.翼支付  依赖库
 
+#### <span style="color:red">正在憋招，耐心等待...</span>
+
 ### 功能说明
 1. 用于天翼支付，基于Java语言实现的依赖库；
 2. 接口参数全部封装，使用者仅需创建对象并设置参数；
