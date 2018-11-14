@@ -14,6 +14,7 @@
 ### 更新日志
 - v1.0.0 天翼支付依赖库发布;
 - v1.0.1 升级依赖库hutool;
+- v1.0.2 项目重构，对外提供统一入口`BestPayClient`
 
 ### 参考文档
 - [API 文档](https://apidoc.gitee.com/thlws/payment-bestpay)
@@ -33,12 +34,12 @@
 <dependency>
     <groupId>org.thlws</groupId>
     <artifactId>payment-bestpay</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 - Gradle
 ```
-compile 'org.thlws:payment-bestpay:1.0.1'
+compile 'org.thlws:payment-bestpay:1.0.2'
 ```
 
 

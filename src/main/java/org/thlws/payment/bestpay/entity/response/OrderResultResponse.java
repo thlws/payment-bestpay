@@ -1,4 +1,4 @@
-package org.thlws.payment.bestpay.entity.output;
+package org.thlws.payment.bestpay.entity.response;
 
 /**
  * 支付和查询 结果对象
@@ -7,7 +7,7 @@ package org.thlws.payment.bestpay.entity.output;
  * @author Hanley[hanley@thlws.com]
  * @version 1.0
  */
-public class OrderResultOutput {
+public class OrderResultResponse {
 
 	/**是否成功 true|false*/
 	private boolean success;

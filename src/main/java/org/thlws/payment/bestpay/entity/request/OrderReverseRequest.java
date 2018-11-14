@@ -1,85 +1,43 @@
-package org.thlws.payment.bestpay.entity.input;
+package org.thlws.payment.bestpay.entity.request;
 
 /**
- * 退款参数对象
+ * 撤销参数对象
  * Created by HanleyTang on 2018/1/5
  *
  * @author Hanley[hanley @thlws.com]
  * @version 1.0
  */
-public class OrderRefundInput {
+public class OrderReverseRequest {
 
 	/**商户号	(必填)	length=30*/
 	private String merchantId;
-	
+
 	/**子商户号	length=30*/
 	private String subMerchantId;
-	
+
 	/**商户调用密码（必填），商户执行时需填入相应密码 ，又称：交易key*/
 	private String merchantPwd;
-	
-	/**原扣款订单号(必填) length=30*/
+
+	/**原扣款成功的订单号(必填) */
 	private String oldOrderNo;
-	
-	/**原订单请求支付 流水号(必填)*/
+
+	/**原扣款成功的请求支付流水号(必填)*/
 	private String oldOrderReqNo;
-	
+
 	/**退款流水号(必填)*/
 	private String refundReqNo;
-	
-	/**退款请求日期(必填),yyyyMMDD*/
+
+	/**退款请求日期(必填),格式 yyyyMMDD*/
 	private String refundReqDate;
-	
-	/**退款交易金额(必填)*/
+
+	/**退款交易金额(必填),单位为分，必须等于原订单金额*/
 	private String transAmt;
-	
-	/**分账明细*/
-	private String ledgerDetail;
-	
-	/**渠道(必填)*/
+
+	/**渠道(必填),默认05*/
 	private String channel = "05";
-	
-	/**Mac校验域(必填),MD5加密获得32位大写字符,无需调用者设值,依赖库会自动设置*/
+
+	/**Mac校验域,无需调用者设值,依赖库会自动设置*/
 	private String mac;
-	
-	/**退款回调地址*/
-	private String bgUrl;
-
-	/**
-	 * Gets old order no.
-	 *
-	 * @return the old order no
-	 */
-	public String getOldOrderNo() {
-		return oldOrderNo;
-	}
-
-	/**
-	 * Gets old order req no.
-	 *
-	 * @return the old order req no
-	 */
-	public String getOldOrderReqNo() {
-		return oldOrderReqNo;
-	}
-
-	/**
-	 * Sets old order no.
-	 *
-	 * @param oldOrderNo the old order no
-	 */
-	public void setOldOrderNo(String oldOrderNo) {
-		this.oldOrderNo = oldOrderNo;
-	}
-
-	/**
-	 * Sets old order req no.
-	 *
-	 * @param oldOrderReqNo the old order req no
-	 */
-	public void setOldOrderReqNo(String oldOrderReqNo) {
-		this.oldOrderReqNo = oldOrderReqNo;
-	}
 
 	/**
 	 * Gets merchant id.
@@ -106,6 +64,24 @@ public class OrderRefundInput {
 	 */
 	public String getMerchantPwd() {
 		return merchantPwd;
+	}
+
+	/**
+	 * Gets old order no.
+	 *
+	 * @return the old order no
+	 */
+	public String getOldOrderNo() {
+		return oldOrderNo;
+	}
+
+	/**
+	 * Gets old order req no.
+	 *
+	 * @return the old order req no
+	 */
+	public String getOldOrderReqNo() {
+		return oldOrderReqNo;
 	}
 
 	/**
@@ -136,15 +112,6 @@ public class OrderRefundInput {
 	}
 
 	/**
-	 * Gets ledger detail.
-	 *
-	 * @return the ledger detail
-	 */
-	public String getLedgerDetail() {
-		return ledgerDetail;
-	}
-
-	/**
 	 * Gets channel.
 	 *
 	 * @return the channel
@@ -160,15 +127,6 @@ public class OrderRefundInput {
 	 */
 	public String getMac() {
 		return mac;
-	}
-
-	/**
-	 * Gets bg url.
-	 *
-	 * @return the bg url
-	 */
-	public String getBgUrl() {
-		return bgUrl;
 	}
 
 	/**
@@ -199,6 +157,24 @@ public class OrderRefundInput {
 	}
 
 	/**
+	 * Sets old order no.
+	 *
+	 * @param oldOrderNo the old order no
+	 */
+	public void setOldOrderNo(String oldOrderNo) {
+		this.oldOrderNo = oldOrderNo;
+	}
+
+	/**
+	 * Sets old order req no.
+	 *
+	 * @param oldOrderReqNo the old order req no
+	 */
+	public void setOldOrderReqNo(String oldOrderReqNo) {
+		this.oldOrderReqNo = oldOrderReqNo;
+	}
+
+	/**
 	 * Sets refund req no.
 	 *
 	 * @param refundReqNo the refund req no
@@ -226,15 +202,6 @@ public class OrderRefundInput {
 	}
 
 	/**
-	 * Sets ledger detail.
-	 *
-	 * @param ledgerDetail the ledger detail
-	 */
-	public void setLedgerDetail(String ledgerDetail) {
-		this.ledgerDetail = ledgerDetail;
-	}
-
-	/**
 	 * Sets channel.
 	 *
 	 * @param channel the channel
@@ -250,15 +217,6 @@ public class OrderRefundInput {
 	 */
 	public void setMac(String mac) {
 		this.mac = mac;
-	}
-
-	/**
-	 * Sets bg url.
-	 *
-	 * @param bgUrl the bg url
-	 */
-	public void setBgUrl(String bgUrl) {
-		this.bgUrl = bgUrl;
 	}
 	
 	

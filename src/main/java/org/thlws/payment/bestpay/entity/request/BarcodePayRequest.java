@@ -1,4 +1,4 @@
-package org.thlws.payment.bestpay.entity.input;
+package org.thlws.payment.bestpay.entity.request;
 
 /**
  * 电信天翼支付参数对象
@@ -7,7 +7,7 @@ package org.thlws.payment.bestpay.entity.input;
  * @author Hanley[hanley @thlws.com]
  * @version 1.0
  */
-public class BarcodePayInput {
+public class BarcodePayRequest {
 
 	/**商户号	(必填)	length=30*/
 	private String merchantId;

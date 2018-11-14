@@ -1,26 +1,26 @@
-package org.thlws.payment.bestpay.entity.output;
+package org.thlws.payment.bestpay.entity.response;
 
 
 /**
- * 查询结果对象.
+ * 退款结果对象
  * Created by HanleyTang on 2018/1/5
  *
  * @author Hanley[hanley@thlws.com]
  * @version 1.0
  */
-public class OrderReverseOutput {
+public class OrderRefundResponse {
 
 	/**是否成功 true|false*/
 	private boolean success;
-
-	/**当 success为true时， result为下单详情，success为false时,result为null）*/
-	private Result result;
 
 	/**错误码,success=true，为null，success=false 为错误码*/
 	private String errorCode;
 
 	/**错误描述,success=true，为null，success=false 为错误描述*/
 	private String errorMsg;
+
+	/**当 success为true时， result为下单详情，success为false时,result为null）*/
+	private Result result;
 
 	/**
 	 * The type Result.
@@ -38,7 +38,6 @@ public class OrderReverseOutput {
 
 		/**交易金额*/
 		private String transAmt;
-
 
 		/**
 		 * Gets sign.
@@ -111,12 +110,12 @@ public class OrderReverseOutput {
 		public void setTransAmt(String transAmt) {
 			this.transAmt = transAmt;
 		}
-		
 		@Override
 		public String toString() {
 			return "Result [sign=" + sign + ", refundReqNo=" + refundReqNo + ", oldOrderNo=" + oldOrderNo
 					+ ", transAmt=" + transAmt + "]";
 		}
+		
 	}
 
 	/**
@@ -126,15 +125,6 @@ public class OrderReverseOutput {
 	 */
 	public boolean isSuccess() {
 		return success;
-	}
-
-	/**
-	 * Gets result.
-	 *
-	 * @return the result
-	 */
-	public Result getResult() {
-		return result;
 	}
 
 	/**
@@ -156,21 +146,21 @@ public class OrderReverseOutput {
 	}
 
 	/**
+	 * Gets result.
+	 *
+	 * @return the result
+	 */
+	public Result getResult() {
+		return result;
+	}
+
+	/**
 	 * Sets success.
 	 *
 	 * @param success the success
 	 */
 	public void setSuccess(boolean success) {
 		this.success = success;
-	}
-
-	/**
-	 * Sets result.
-	 *
-	 * @param result the result
-	 */
-	public void setResult(Result result) {
-		this.result = result;
 	}
 
 	/**
@@ -191,10 +181,19 @@ public class OrderReverseOutput {
 		this.errorMsg = errorMsg;
 	}
 
+	/**
+	 * Sets result.
+	 *
+	 * @param result the result
+	 */
+	public void setResult(Result result) {
+		this.result = result;
+	}
+
 	@Override
 	public String toString() {
-		return "OrderReverseOutput [success=" + success + ", result=" + result + ", errorCode=" + errorCode
-				+ ", errorMsg=" + errorMsg + "]";
+		return "OrderRefundResponse [success=" + success + ", errorCode=" + errorCode + ", errorMsg=" + errorMsg
+				+ ", result=" + result + "]";
 	}
 	
 }

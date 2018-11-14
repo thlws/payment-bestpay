@@ -6,13 +6,13 @@ import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import org.thlws.payment.bestpay.api.BestpayApi;
-import org.thlws.payment.bestpay.entity.input.BarcodePayInput;
-import org.thlws.payment.bestpay.entity.input.OrderRefundInput;
-import org.thlws.payment.bestpay.entity.input.OrderReverseInput;
-import org.thlws.payment.bestpay.entity.input.QueryOrderInput;
-import org.thlws.payment.bestpay.entity.output.OrderRefundOutput;
-import org.thlws.payment.bestpay.entity.output.OrderResultOutput;
-import org.thlws.payment.bestpay.entity.output.OrderReverseOutput;
+import org.thlws.payment.bestpay.entity.request.BarcodePayRequest;
+import org.thlws.payment.bestpay.entity.request.OrderRefundRequest;
+import org.thlws.payment.bestpay.entity.request.OrderReverseRequest;
+import org.thlws.payment.bestpay.entity.request.QueryOrderRequest;
+import org.thlws.payment.bestpay.entity.response.OrderRefundResponse;
+import org.thlws.payment.bestpay.entity.response.OrderResultResponse;
+import org.thlws.payment.bestpay.entity.response.OrderReverseResponse;
 import org.thlws.payment.bestpay.sign.MD5;
 import org.thlws.payment.bestpay.utils.ThlwsJsonUtil;
 
@@ -40,33 +40,34 @@ public class BestpayCore implements BestpayApi{
 	/**
 	 * 天翼支付-付款码支付.
 	 *
-	 * @param input 支付参数对象 {@link BarcodePayInput}
+	 * @param request 支付参数对象 {@link BarcodePayRequest}
 	 * @param key   商户数据Key,签名需要
-	 * @return 支付结果对象 {@link OrderResultOutput}
+	 * @return 支付结果对象 {@link OrderResultResponse}
 	 */
-	public static OrderResultOutput barcode(BarcodePayInput input, String key) {
+	public static OrderResultResponse barcode(BarcodePayRequest request, String key) throws Exception{
 
-		OrderResultOutput out = null;
+		OrderResultResponse out = null;
 
 		try {
 			StringBuilder sb = new StringBuilder();
-			sb.append("MERCHANTID=").append(input.getMerchantId());
-			sb.append("&ORDERNO=").append(input.getOrderNo());
-			sb.append("&ORDERREQNO=").append(input.getOrderReqNo());
-			sb.append("&ORDERDATE=").append(input.getOrderDate());
-			sb.append("&BARCODE=").append(input.getBarcode());
-			sb.append("&ORDERAMT=").append(input.getOrderAmt());
+			sb.append("MERCHANTID=").append(request.getMerchantId());
+			sb.append("&ORDERNO=").append(request.getOrderNo());
+			sb.append("&ORDERREQNO=").append(request.getOrderReqNo());
+			sb.append("&ORDERDATE=").append(request.getOrderDate());
+			sb.append("&BARCODE=").append(request.getBarcode());
+			sb.append("&ORDERAMT=").append(request.getOrderAmt());
 			sb.append("&KEY=").append(key);
 			String mac = MD5.sign(sb.toString());
 
-			Map<String, Object> map = BeanUtil.beanToMap(input,false,true);
+			Map<String, Object> map = BeanUtil.beanToMap(request,false,true);
 			map.put("mac", mac);
 			log.info("天翼扫码支付请求数据[barcode]->request:\n {}", ThlwsJsonUtil.format(map));
 			String result = HttpUtil.get(barcode, map);
 			log.info("天翼扫码支付返回数据[barcode]->response \n : {}",ThlwsJsonUtil.format(result));
-			out = JSONUtil.toBean(result,OrderResultOutput.class);
+			out = JSONUtil.toBean(result, OrderResultResponse.class);
 		} catch (Exception e) {
-			log.error("天翼扫码支付异常[barcode],error={}",e.getMessage());
+			log.error(e);
+			throw e;
 		}
 		return out;
 	}
@@ -75,108 +76,111 @@ public class BestpayCore implements BestpayApi{
 	/**
 	 * 查询支付订单
 	 *
-	 * @param input 查询参数对象 {@link QueryOrderInput}
+	 * @param request 查询参数对象 {@link QueryOrderRequest}
 	 * @param key   商户数据Key,签名需要
-	 * @return 支付结果对象 {@link OrderResultOutput}
+	 * @return 支付结果对象 {@link OrderResultResponse}
 	 */
-	public static OrderResultOutput query(QueryOrderInput input, String key) {
+	public static OrderResultResponse query(QueryOrderRequest request, String key) throws Exception {
 		
-		OrderResultOutput out = null;
+		OrderResultResponse out = null;
 
 		try {
 			StringBuilder sb = new StringBuilder();
-			sb.append("MERCHANTID=").append(input.getMerchantId());
-			sb.append("&ORDERNO=").append(input.getOrderNo());
-			sb.append("&ORDERREQNO=").append(input.getOrderReqNo());
-			sb.append("&ORDERDATE=").append(input.getOrderDate());
+			sb.append("MERCHANTID=").append(request.getMerchantId());
+			sb.append("&ORDERNO=").append(request.getOrderNo());
+			sb.append("&ORDERREQNO=").append(request.getOrderReqNo());
+			sb.append("&ORDERDATE=").append(request.getOrderDate());
 			sb.append("&KEY=").append(key);
 
 			String mac = MD5.sign(sb.toString());
-			Map<String, Object> map = BeanUtil.beanToMap(input,false,true);
+			Map<String, Object> map = BeanUtil.beanToMap(request,false,true);
 			map.put("mac", mac);
 			log.info("翼支付查询请求数据[query]->request:\n {}", ThlwsJsonUtil.format(map));
 			String result = HttpUtil.get(query, map);
 			log.info("翼支付查询返回数据[query]->response \n : {}",ThlwsJsonUtil.format(result));
-			out = JSONUtil.toBean(result,OrderResultOutput.class);
+			out = JSONUtil.toBean(result, OrderResultResponse.class);
 
 		} catch (Exception e) {
-			log.error("查询支付订单异常[query],error={}",e.getMessage());
+			log.error(e);
+			throw e;
 		}
 		return out;
 	}
 
 
 	/**
-	 * 商户退款,须商户密码 OrderRefundInput.merchantPwd
+	 * 商户退款,须商户密码 OrderRefundRequest.merchantPwd
 	 *
-	 * @param input 退款参数对象 {@link OrderRefundInput}
+	 * @param request 退款参数对象 {@link OrderRefundRequest}
 	 * @param key   商户数据Key,签名需要
-	 * @return 退款结果对象 {@link OrderRefundOutput}
+	 * @return 退款结果对象 {@link OrderRefundResponse}
 	 */
-	public static OrderRefundOutput refund(OrderRefundInput input, String key) {
+	public static OrderRefundResponse refund(OrderRefundRequest request, String key)  throws Exception {
 		
-		OrderRefundOutput out = null;
+		OrderRefundResponse out = null;
 
 		try {
 			StringBuilder sb = new StringBuilder();
-			sb.append("MERCHANTID=").append(input.getMerchantId());
-			sb.append("&MERCHANTPWD=").append(input.getMerchantPwd());
-			sb.append("&OLDORDERNO=").append(input.getOldOrderNo());
-			sb.append("&OLDORDERREQNO=").append(input.getOldOrderReqNo());
-			sb.append("&REFUNDREQNO=").append(input.getRefundReqNo());
-			sb.append("&REFUNDREQDATE=").append(input.getRefundReqDate() );
-			sb.append("&TRANSAMT=").append(input.getTransAmt());
-			sb.append("&LEDGERDETAIL=").append(input.getLedgerDetail());
+			sb.append("MERCHANTID=").append(request.getMerchantId());
+			sb.append("&MERCHANTPWD=").append(request.getMerchantPwd());
+			sb.append("&OLDORDERNO=").append(request.getOldOrderNo());
+			sb.append("&OLDORDERREQNO=").append(request.getOldOrderReqNo());
+			sb.append("&REFUNDREQNO=").append(request.getRefundReqNo());
+			sb.append("&REFUNDREQDATE=").append(request.getRefundReqDate() );
+			sb.append("&TRANSAMT=").append(request.getTransAmt());
+			sb.append("&LEDGERDETAIL=").append(request.getLedgerDetail());
 			sb.append("&KEY=").append(key);
 
 			String mac = MD5.sign(sb.toString());
-			Map<String, Object> map = BeanUtil.beanToMap(input,false,true);
+			Map<String, Object> map = BeanUtil.beanToMap(request,false,true);
 			map.put("mac", mac);
 			log.info("翼支付退款请求数据[refund]->request:\n {}", ThlwsJsonUtil.format(map));
 			String result = HttpUtil.post(refund, map);
 			log.info("翼支付退款返回数据[refund]->response \n : {}",ThlwsJsonUtil.format(result));
-			out = JSONUtil.toBean(result,OrderRefundOutput.class);
+			out = JSONUtil.toBean(result, OrderRefundResponse.class);
 
 		} catch (Exception e) {
-			log.error("退款异常[refund],error={}",e.getMessage());
+			log.error(e);
+			throw e;
 		}
 		return out;
 		
 	}
 
 	/**
-	 * 撤销支付,须商户密码 OrderReverseInput.merchantPwd
+	 * 撤销支付,须商户密码 OrderReverseRequest.merchantPwd
 	 *
-	 * @param input 撤销参数对象 {@link OrderReverseInput}
+	 * @param request 撤销参数对象 {@link OrderReverseRequest}
 	 * @param key   商户数据Key,签名需要
-	 * @return 撤销结果对象 {@link OrderReverseOutput}
+	 * @return 撤销结果对象 {@link OrderReverseResponse}
 	 */
-	public static OrderReverseOutput reverse(OrderReverseInput input, String key) {
+	public static OrderReverseResponse reverse(OrderReverseRequest request, String key)  throws Exception {
 		
 		
-		OrderReverseOutput out = null;
+		OrderReverseResponse out = null;
 
 		try {
 			StringBuilder sb = new StringBuilder();
-			sb.append("MERCHANTID=").append(input.getMerchantId());
-			sb.append("&MERCHANTPWD=").append(input.getMerchantPwd());
-			sb.append("&OLDORDERNO=").append(input.getOldOrderNo());
-			sb.append("&OLDORDERREQNO=").append(input.getOldOrderReqNo());
-			sb.append("&REFUNDREQNO=").append(input.getRefundReqNo());
-			sb.append("&REFUNDREQDATE=").append(input.getRefundReqDate());
-			sb.append("&TRANSAMT=").append(input.getTransAmt());
+			sb.append("MERCHANTID=").append(request.getMerchantId());
+			sb.append("&MERCHANTPWD=").append(request.getMerchantPwd());
+			sb.append("&OLDORDERNO=").append(request.getOldOrderNo());
+			sb.append("&OLDORDERREQNO=").append(request.getOldOrderReqNo());
+			sb.append("&REFUNDREQNO=").append(request.getRefundReqNo());
+			sb.append("&REFUNDREQDATE=").append(request.getRefundReqDate());
+			sb.append("&TRANSAMT=").append(request.getTransAmt());
 			sb.append("&KEY=").append(key);
 
 			String mac = MD5.sign(sb.toString());
-			Map<String, Object> map = BeanUtil.beanToMap(input,false,true);
+			Map<String, Object> map = BeanUtil.beanToMap(request,false,true);
 			map.put("mac", mac);
 			log.info("翼支付撤销请求数据[reverse]->request:\n {}", ThlwsJsonUtil.format(map));
 			String result = HttpUtil.post(reverse, map);
 			log.info("翼支付撤销返回数据[reverse]->response \n : {}",ThlwsJsonUtil.format(result));
-			out = JSONUtil.toBean(result,OrderReverseOutput.class);
+			out = JSONUtil.toBean(result, OrderReverseResponse.class);
 
 		} catch (Exception e) {
-			log.error("撤销订单异常[reverse],error={}",e.getMessage());
+			log.error(e);
+			throw e;
 		}
 		return out;
 		
