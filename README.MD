@@ -5,6 +5,7 @@
 > 基于Java实现的 中国电信.翼支付  依赖库
 
 #### <span style="color:red">功能已整合到payment-thl中，此项目不再维护，新用户请直接使用 payment-thl</span>
+【微信、支付宝、翼支付 三合一】 [https://gitee.com/thlws/payment-thl](https://gitee.com/thlws/payment-thl)
 
 ### 功能说明
 1. 用于天翼支付，基于Java语言实现的依赖库；
